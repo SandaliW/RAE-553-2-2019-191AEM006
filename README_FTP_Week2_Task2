@@ -1,3 +1,34 @@
-#          As the second task I need to  figure out how to upload my own files to some FTP server. 
-#          There are two methods for uploading files:
-#               1)storlines    2)storbinary
+#        As the second task I need to  figure out how to upload my own files to some FTP server. 
+
+#        There are two methods for uploading files:
+#            1)storlines :- upload text files to the FTP server and calles the readline() method 
+                            on each line in the file until it reads the last line
+                            
+             2)storbinary :- upload binary files to the FTP server and calles the read() method 
+                             until there is no more data to read and upload
+
+           from ftplib import FTP
+           
+>>> from ftplib import FTP
+>>> ftp = FTP('ftp.lt.debian.org')
+>>> ftp.login();
+'230 Login successful.'
+>>> with open('My_Name.txt', 'r') as f:
+...     ftp.storlines('STOR %s'  % 'remotefile.txt', f)
+...
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+  File "F:\Miniconda\envs\191AEM006_FTP.env\lib\ftplib.py", line 530, in storlines
+    with self.transfercmd(cmd) as conn:
+  File "F:\Miniconda\envs\191AEM006_FTP.env\lib\ftplib.py", line 399, in transfercmd
+    return self.ntransfercmd(cmd, rest)[0]
+  File "F:\Miniconda\envs\191AEM006_FTP.env\lib\ftplib.py", line 365, in ntransfercmd
+    resp = self.sendcmd(cmd)
+  File "F:\Miniconda\envs\191AEM006_FTP.env\lib\ftplib.py", line 273, in sendcmd
+    return self.getresp()
+  File "F:\Miniconda\envs\191AEM006_FTP.env\lib\ftplib.py", line 246, in getresp
+    raise error_perm(resp)
+ftplib.error_perm: 550 Permission denied.
+>>>
+
+
