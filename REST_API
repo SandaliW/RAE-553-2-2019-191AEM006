@@ -1,0 +1,17 @@
+# app.py
+
+from flask import Flask                # Import all the necessary packages from flask
+#from flask import jsonif,request
+from flask_restful import Resource, Api
+
+app = Flask(__name__)                  # Creating the app
+api = Api(app)
+
+#########@app.route('/', methods=['GET'])
+class Student(Resource):               # API works with resources and every resource work with a class
+    def get(self, Sandali):            # Stating the name of the student by using the method 'get'
+        return ('student',Sandali)     # stating the API as Sandali
+                                      
+api.add_resource(Student, '/student/<string:Sandali>')   # In line 16 resource 'student' will be accesible via API
+
+app.run(port=5000)                    # Launching the app
