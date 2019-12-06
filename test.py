@@ -3,7 +3,7 @@ from flask_restful import Resource, Api
 from flask_jwt_extended import jwt_required
 from security import authenticate, identity
 
-# this is an example i got from stackoverflow. Author said that  the code is running but when i run it conda 
+# this is an example i got from stackoverflow. Author said that  the code is running but when i run it in conda 
 # it again shows the same error message i stated on app.py
 
 app = Flask(__name__)
