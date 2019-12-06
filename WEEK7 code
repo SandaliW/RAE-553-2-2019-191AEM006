@@ -1,0 +1,62 @@
+#app.py
+# snapshot results are sent by e-mail sandaliwasanaim@gmail.com
+
+from flask import Flask
+from flask_restful import Resource, Api, reqparse
+# from flask_jwt_extended import jwt_required 
+#from security import authenticate
+
+#we make a list of students
+students_List = {
+    "John": {
+        "Role": "student",
+        "ID": "191AEM099"
+    },
+    "Sandali": {
+        "Role": "student",
+        "ID": "191AEM006"
+    }
+}
+
+app = Flask(__name__)
+app.secret_key = 'John'
+api = Api(app)
+
+class Students(Resource):
+    def get (self):
+        return students_List  #here we return the student list
+
+class Student(Resource):
+    def get(self, name):
+        return students_List[name]
+    def put(self, name):
+        parser = reqparse.RequestParser()
+        parser.add_argument("Role")
+        args = parser.parse_args()
+        students_List[name] = {"Role": args["Role"]}
+        return students_List[name]
+    def post(self, name):
+        if name in students_List:
+            parser = reqparse.RequestParser()
+            parser.add_argument("Role")
+            args = parser.parse_args()
+            students_List[name]["Role"] = args["Role"]
+            return students_List[name]
+        return {"message": "Student {} not in the Students List".format(name)}
+    def delete(self, name):
+        if name in students_List:
+            students_List.pop(name)
+            return students_List
+        return {"message": "Student {} not in the Students List".format(name)}
+
+
+api.add_resource(Students, '/students')
+api.add_resource(Student, '/student/<string:name>')
+
+#http://127.0.0.1:5000/student/Sandali
+#http://127.0.0.1:5000/student/John
+
+#when we choose the methos we want GET, PUT, POST, DELETE 
+#for above two urls, resilts will also be given respectively
+
+app.run(port=5000)
