@@ -1,39 +1,23 @@
+#test.py
+
 import sqlite3
 
-class User:
- def_init_(self,_id, username, password);
-  self.id = _id
-  self.username = username
-  self.password = password
+connection = sqlite3.connect('data.db')
+print ("Opened database successfully")
 
- @classmethod
- def find_by_username(cls, username);
-  connection = sqlite3.connect('data.db')
-  cursor = connection.cursor()
+cursor = connection.cursor()
 
-  query = "SELECT * FROM users WHERE username=?"
-  result = cursor.execute(query, (username,))
-  row = result.fetchone()
-  if row:
-    user = cls(*row)
-  else:
-    user = None
-  connection.close()
-  return user
+create_table = "CREATE TABLE users (id text, username text, password text)"
+cursor.execute(create_table)
 
- @classmethod
- def find_by_id(cls, _id):
-  connection = sqlite3.connect('data.db')
-  cursor = connection.cursor()
+user = (1, 'sandali', '1111')
+user = (2, 'rolf', '1122')
+user = (3, 'john', '1133')
+insert_query = "INSERT INTO users VALUES (?, ?, ?)"
+cursor.execute(insert_query, user)
 
-  query = "SELECT * FROM users WHERE id=?"
-  result = cursor.execute(query, (_id,))
-  row = result.fetchone()
-  if row:
-    user = cls(*row)
-  else:
-    user = None
-  connection.close()
-  return user
+connection.commit()
+connection.close()
+
 
 
