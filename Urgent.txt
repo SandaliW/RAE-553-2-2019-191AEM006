@@ -1,11 +1,13 @@
 I have all the necessary packages and my codes are running without an error.
 
 But when i tride the http://127.0.0.1:5000/auth, It shows as an internol server error.
-I tried all the possibilities and even used the code in the https://pythonhosted.org/Flask-JWT/ 
-documentation as test.py (I included it in the folder WEEK9) but the same error is given in the postman.
 
-I have no idea how to fix this because when i discussed this error with my collegues,
-they also don't have any explanation to this.
+I tried all the possibilities untill now and even used the code in the https://pythonhosted.org/Flask-JWT/ 
+documentation as test.py (I also uplode it here) but the same error is given in the postman.
+
+I have no idea how to fix this.
+I discussed this error with my collegues and they also don't have any explanation to this.
+I thought there is something wrong with libraries but i installed all the necessary ones according to the instructions.
 
 I hope my contribution will be taken into consideration because i really have no idea what to do.
 
