@@ -3,8 +3,7 @@
 
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
-from flask_jwt_extended import jwt_required # set JWT work with the app we are creating
-
+from flask_jwt import JWT, jwt_required   # set JWT work with the app we are creating
 from security import authenticate, identity  #permit the authentication of the user
 
 #we make a list of musical instruments
@@ -21,7 +20,13 @@ items_List = {
 
 app = Flask(__name__)
 app.secret_key = 'music'
+app.config['SECRET_KEY'] = 'super-secret'
+
+jwt = JWT(app, authenticate, identity)
 api = Api(app)
+
+if __name__ == '__main__':
+    app.run()
 
 class Items(Resource):
     def get (self):
